@@ -1,0 +1,29 @@
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			ps2: ps2pi {
+				compatible = "ps2pi";
+				pinctrl-names = "default";
+				pinctrl-0 = <&ps2pi_pins>;
+				status = "okay";
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			ps2pi_pins: ps2pi_pins {
+				brcm,pins = <14 15>;
+				brcm,function = <0 4>; /* input alt0 */
+				brcm,pull = <1 1>;
+			};
+		};
+	};
+};
